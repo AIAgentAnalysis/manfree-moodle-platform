@@ -455,9 +455,15 @@ manfree-moodle-platform/
 - Manual execution of `./auto-backup.sh`
 
 **What gets backed up:**
-1. **Moodle Core Files** (`moodle_data.tar.gz`)
-2. **User Data & Files** (`moodle_files.tar.gz`)
-3. **Database** (`mariadb_data.tar.gz`)
+1. **Moodle Core Files** (`moodle_data.tar.gz`) - ~71MB
+2. **User Data & Files** (`moodle_files.tar.gz`) - ~3-4MB
+3. **Database** (`mariadb_data.tar.gz`) - ~12MB
+
+**Enhanced Features:**
+- ✅ **Size Monitoring**: Warns about Git limits (>90MB files)
+- ✅ **Automatic Cleanup**: Keeps only last 3 backups
+- ✅ **Git LFS Ready**: Configured for large file handling
+- ✅ **Storage Management**: Prevents unlimited growth
 
 **Backup naming convention:**
 ```
@@ -489,12 +495,33 @@ ls -la backup/
 # Check backup sizes
 du -sh backup/*
 
-# Clean old backups (older than 30 days)
-find backup/ -name "*.tar.gz" -mtime +30 -delete
-
 # Manual backup
 ./auto-backup.sh
+
+# Automatic cleanup (keeps last 3 backups)
+# No manual cleanup needed - handled automatically
 ```
+
+### Git LFS for Large Files
+
+**When backup files exceed 90MB:**
+```bash
+# Install Git LFS (one-time setup)
+git lfs install
+
+# Track large files (already configured in .gitattributes)
+git lfs track "*.tar.gz"
+
+# Commit and push normally
+git add .
+git commit -m "Add backups with Git LFS"
+git push
+```
+
+**Storage Limits:**
+- **Without Git LFS**: 100MB per file limit
+- **With Git LFS**: No practical limit
+- **Auto-cleanup**: Keeps only 3 backups (~258MB max)
 
 ---
 
