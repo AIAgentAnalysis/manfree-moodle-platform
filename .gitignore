@@ -1,22 +1,54 @@
-### AL ###
-#Template for AL projects for Dynamics 365 Business Central
-#launch.json folder
+# Backup files (too large for git)
+backup/*.tar.gz
+
+# Moodle source (large, can be regenerated)
+# Uncomment next line if you want to exclude moodle source from Git
+# moodle-source/
+
+# Docker volumes and data
+.docker/
+docker-data/
+
+# Environment files with secrets
+.env
+.env.local
+.env.production
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+*.tmp
+*.temp
+.DS_Store
+Thumbs.db
+
+# IDE files
 .vscode/
-#Cache folder
-.alcache/
-#Symbols folder
-.alpackages/
-#Snapshots folder
-.snapshots/
-#Testing Output folder
-.output/
-#Extension App-file
-*.app
-#Rapid Application Development File
-rad.json
-#Translation Base-file
-*.g.xlf
-#License-file
-*.flf
-#Test results file
-TestResults.xml
+.idea/
+*.swp
+*.swo
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Plugin zip files (optional - uncomment if you don't want to track plugins)
+# plugins/*.zip
+
+# Custom themes (optional - uncomment if themes are large)
+# themes/*/
+
+# Backup directory structure (keep README files)
+backup/*
+!backup/README.md
+
+# Keep directory structure
+!plugins/README.md
+!themes/README.md

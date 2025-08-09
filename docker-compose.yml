@@ -1,0 +1,65 @@
+version: '3.8'
+
+services:
+  mariadb:
+    image: mariadb:10.6
+    container_name: manfree_mariadb
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: manfree2024
+      MYSQL_DATABASE: moodle
+      MYSQL_USER: moodle
+      MYSQL_PASSWORD: moodle123
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    networks:
+      - manfree_network
+
+  moodle:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    image: manfree-moodle:v4.5.6
+    container_name: manfree_moodle
+    depends_on:
+      - mariadb
+    restart: always
+    ports:
+      - "8080:80"
+    environment:
+      MOODLE_DB_HOST: mariadb
+      MOODLE_DB_NAME: moodle
+      MOODLE_DB_USER: moodle
+      MOODLE_DB_PASSWORD: moodle123
+      MOODLE_VERSION: v4.5.6
+    volumes:
+      # Persistent data volumes (survives container rebuilds)
+      - moodle_data:/var/www/html
+      - moodle_data_files:/var/www/moodledata
+      # Plugin/theme installation
+      - ./plugins:/tmp/plugins
+      - ./themes:/tmp/themes
+      # Customizations protection
+      - ./customizations:/tmp/customizations
+      # Version tracking
+      - ./VERSION:/var/www/html/PLATFORM_VERSION:ro
+    networks:
+      - manfree_network
+
+  jobe:
+    image: trampgeek/jobeinabox
+    container_name: manfree_jobe
+    restart: always
+    ports:
+      - "4000:80"
+    networks:
+      - manfree_network
+
+volumes:
+  mariadb_data:
+  moodle_data:
+  moodle_data_files:
+
+networks:
+  manfree_network:
+    driver: bridge
