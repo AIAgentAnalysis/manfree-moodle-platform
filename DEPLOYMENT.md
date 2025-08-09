@@ -60,6 +60,11 @@ cd manfree-moodle-platform
 # Verify files are executable
 chmod +x *.sh
 
+# CRITICAL: Pre-pull Docker images
+docker pull php:8.1-apache
+docker pull mariadb:10.6
+docker pull trampgeek/jobeinabox
+
 # Start platform
 docker-compose up -d
 

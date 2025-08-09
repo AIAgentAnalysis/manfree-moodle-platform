@@ -131,7 +131,17 @@ cd manfree-moodle-platform
 ls -la *.sh
 ```
 
-### 2. First Launch
+### 2. Pre-pull Docker Images (CRITICAL!)
+```bash
+# Pull required base images first (prevents build failures)
+docker pull php:8.1-apache
+docker pull mariadb:10.6
+docker pull trampgeek/jobeinabox
+
+# This step is essential on fresh systems
+```
+
+### 3. First Launch
 ```bash
 # Start platform
 ./up.sh
@@ -247,6 +257,22 @@ chown -R www-data:www-data /var/www/html 2>/dev/null || true
 **Solution Applied**: Added error handling to all chown commands
 
 ### Common Setup Issues & Fixes
+
+#### 5. PHP 8.1-Apache Image Missing
+**Error**: `Unable to find image 'php:8.1-apache:latest' locally`
+
+**Root Cause**: Fresh system doesn't have base Docker images
+
+**Solution Applied**:
+```bash
+# Pre-pull required images
+docker pull php:8.1-apache
+docker pull mariadb:10.6
+docker pull trampgeek/jobeinabox
+
+# Then start platform
+./up.sh
+```
 
 #### Build Takes Too Long
 **Normal**: First build takes 5-15 minutes

@@ -60,7 +60,26 @@ docker exec manfree_moodle php -i | grep max_input_vars
 # Should show: max_input_vars => 5000 => 5000
 ```
 
-### 3. Container Won't Start
+### 3. PHP Base Image Missing
+
+**Symptoms:**
+```
+Unable to find image 'php:8.1-apache:latest' locally
+Error response from daemon: pull access denied
+```
+
+**Solution:**
+```bash
+# Pre-pull required Docker images
+docker pull php:8.1-apache
+docker pull mariadb:10.6
+docker pull trampgeek/jobeinabox
+
+# Then start platform
+docker-compose up -d
+```
+
+### 4. Container Won't Start
 
 **Symptoms:**
 ```
