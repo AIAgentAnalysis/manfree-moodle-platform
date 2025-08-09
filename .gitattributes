@@ -1,0 +1,6 @@
+# Git LFS for large backup files
+backup/*.tar.gz filter=lfs diff=lfs merge=lfs -text
+
+# Track other potentially large files
+*.zip filter=lfs diff=lfs merge=lfs -text
+*.sql filter=lfs diff=lfs merge=lfs -text

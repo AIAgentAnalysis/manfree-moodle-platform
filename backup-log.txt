@@ -1,0 +1,5 @@
+BACKUP LOG
+==========
+
+2025-01-09 12:31:29 - manfree-backup-20250809_123129 - Initial backup after Docker fix
+2025-01-09 12:53:02 - manfree-backup-20250809_125302 - Test backup after restore

@@ -1,5 +1,5 @@
-# Backup files (too large for git)
-backup/*.tar.gz
+# Backup files - WARNING: Large files, monitor Git repo size
+# backup/*.tar.gz
 
 # Moodle source (large, can be regenerated)
 # Uncomment next line if you want to exclude moodle source from Git
@@ -46,8 +46,8 @@ Thumbs.db
 # themes/*/
 
 # Backup directory structure (keep README files)
-backup/*
-!backup/README.md
+# backup/*
+# !backup/README.md
 
 # Keep directory structure
 !plugins/README.md
