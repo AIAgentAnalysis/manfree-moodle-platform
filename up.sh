@@ -3,9 +3,17 @@ set -e
 
 echo "🚀 Starting Manfree Technologies Moodle Platform..."
 
-# Restore backup if exists
-if [ -f "./auto-restore.sh" ]; then
-    ./auto-restore.sh
+# Ask before restoring backup
+if [ -f "./auto-restore.sh" ] && [ -d "./backup" ] && [ "$(ls -A ./backup/*.tar.gz 2>/dev/null)" ]; then
+    echo "📦 Backup found. Restore it?"
+    read -p "Restore backup? (y/N): " -n 1 -r
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        echo "🔄 Restoring backup..."
+        ./auto-restore.sh
+    else
+        echo "⏭️  Skipping backup restore"
+    fi
 fi
 
 # Build and start containers

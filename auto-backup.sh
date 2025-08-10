@@ -1,6 +1,13 @@
 #!/bin/bash
 set -e
 
+# Error handling
+trap 'echo "❌ Backup failed at line $LINENO"; exit 1' ERR
+
+# Variables for maintainability
+PROJECT_NAME="manfree-moodle-platform"
+VOLUME_PREFIX="${PROJECT_NAME}_"
+
 BACKUP_DIR="./backup"
 TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
 BACKUP_NAME="manfree-backup-${TIMESTAMP}"
@@ -13,21 +20,21 @@ mkdir -p "${BACKUP_DIR}"
 # Backup Moodle data
 echo "Backing up Moodle data..."
 docker run --rm \
-    -v manfree-moodle-platform_moodle_data:/data \
+    -v "${VOLUME_PREFIX}moodle_data":/data \
     -v "$(pwd)/${BACKUP_DIR}:/backup" \
     alpine tar czf "/backup/${BACKUP_NAME}_moodle_data.tar.gz" -C /data .
 
 # Backup Moodle files
 echo "Backing up Moodle files..."
 docker run --rm \
-    -v manfree-moodle-platform_moodle_data_files:/data \
+    -v "${VOLUME_PREFIX}moodle_data_files":/data \
     -v "$(pwd)/${BACKUP_DIR}:/backup" \
     alpine tar czf "/backup/${BACKUP_NAME}_moodle_files.tar.gz" -C /data .
 
 # Backup MariaDB
 echo "Backing up database..."
 docker run --rm \
-    -v manfree-moodle-platform_mariadb_data:/data \
+    -v "${VOLUME_PREFIX}mariadb_data":/data \
     -v "$(pwd)/${BACKUP_DIR}:/backup" \
     alpine tar czf "/backup/${BACKUP_NAME}_mariadb_data.tar.gz" -C /data .
 
@@ -48,7 +55,7 @@ done
 
 # Cleanup old backups - keep only last 3
 echo "🧹 Cleaning up old backups (keeping last 3)..."
-ls -t "${BACKUP_DIR}"/*_moodle_data.tar.gz 2>/dev/null | tail -n +4 | while read old_backup; do
+find "${BACKUP_DIR}" -name "*_moodle_data.tar.gz" -type f -printf '%T@ %p\n' 2>/dev/null | sort -rn | tail -n +4 | cut -d' ' -f2- | while read old_backup; do
     old_name=$(basename "$old_backup" "_moodle_data.tar.gz")
     echo "  Removing: $old_name"
     rm -f "${BACKUP_DIR}/${old_name}"*.tar.gz

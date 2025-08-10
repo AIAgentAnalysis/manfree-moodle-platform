@@ -6,10 +6,10 @@ services:
     container_name: manfree_mariadb
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: manfree2024
-      MYSQL_DATABASE: moodle
-      MYSQL_USER: moodle
-      MYSQL_PASSWORD: moodle123
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     volumes:
       - mariadb_data:/var/lib/mysql
     networks:
@@ -28,10 +28,10 @@ services:
       - "8080:80"
     environment:
       MOODLE_DB_HOST: mariadb
-      MOODLE_DB_NAME: moodle
-      MOODLE_DB_USER: moodle
-      MOODLE_DB_PASSWORD: moodle123
-      MOODLE_VERSION: v4.5.6
+      MOODLE_DB_NAME: ${MYSQL_DATABASE}
+      MOODLE_DB_USER: ${MYSQL_USER}
+      MOODLE_DB_PASSWORD: ${MYSQL_PASSWORD}
+      MOODLE_VERSION: ${MOODLE_VERSION}
     volumes:
       # Persistent data volumes (survives container rebuilds)
       - moodle_data:/var/www/html
