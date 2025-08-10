@@ -17,11 +17,26 @@ $CFG->dboptions = array (
   'dbcollation' => 'utf8mb4_unicode_ci',
 );
 
-$CFG->wwwroot   = 'http://localhost:8080';
+// Dynamic URL detection for tunnels
+if (isset($_SERVER['HTTP_HOST']) && strpos($_SERVER['HTTP_HOST'], 'ngrok') !== false) {
+    $CFG->wwwroot = 'https://' . $_SERVER['HTTP_HOST'];
+    $CFG->sslproxy = true;
+    $_SERVER['HTTPS'] = 'on';
+    $_SERVER['SERVER_PORT'] = 443;
+} elseif (isset($_SERVER['HTTP_HOST']) && strpos($_SERVER['HTTP_HOST'], 'trycloudflare') !== false) {
+    $CFG->wwwroot = 'https://' . $_SERVER['HTTP_HOST'];
+    $CFG->sslproxy = true;
+    $_SERVER['HTTPS'] = 'on';
+    $_SERVER['SERVER_PORT'] = 443;
+} else {
+    $CFG->wwwroot = 'http://localhost:8080';
+}
 $CFG->dataroot  = '/var/www/moodledata';
 $CFG->admin     = 'admin';
 
 $CFG->directorypermissions = 0777;
+
+// Dynamic tunnel detection handles SSL automatically
 
 require_once(__DIR__ . '/lib/setup.php');
 
