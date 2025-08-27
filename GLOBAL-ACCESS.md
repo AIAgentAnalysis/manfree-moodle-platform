@@ -37,7 +37,8 @@ sudo apt update && sudo apt install ngrok
 
 #### **3. Configure Authtoken**
 ```bash
-ngrok config add-authtoken YOUR_AUTHTOKEN_HERE
+ngrok config add-authtoken YOUR_AUTHTOKEN_HERE // token:31Vra14XF5HXcg9T1bSscPWf9x0_2JkKEi11EXAEq22PP6dAF
+ngrok http 8080
 ```
 
 #### **4. Start Global Tunnel**
