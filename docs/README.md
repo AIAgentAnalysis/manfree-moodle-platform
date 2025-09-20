@@ -12,7 +12,9 @@ Centralized documentation for Manfree Moodle Platform.
 - **[Environment Variables](../.env.example)** - Configuration template
 
 ## 🌐 Global Access
-- **[Tunneling Guide](../tunneling/README.md)** - All tunnel solutions
+- **[Global Access Guide](../global-access/README.md)** - All access solutions
+- **[Permanent Tunnels](../global-access/permanent/)** - Static URLs with your domain
+- **[Temporary Tunnels](../global-access/temporary/)** - Quick testing solutions
 - **[Router Port Forwarding](../ROUTER-PORT-FORWARDING.md)** - Network setup
 
 ## 🔧 Operations

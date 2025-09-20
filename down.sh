@@ -21,5 +21,11 @@ fi
 # Stop containers
 docker-compose down
 
+# Show tunnel status
+if systemctl is-active cloudflared &>/dev/null; then
+    echo "🌍 Tunnel still running: https://learning.manfreetechnologies.com"
+    echo "   Stop with: sudo systemctl stop cloudflared"
+fi
+
 echo "✅ Platform stopped successfully!"
 echo "💾 Backup saved (if backup script exists)"

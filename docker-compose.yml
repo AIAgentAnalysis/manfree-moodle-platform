@@ -57,6 +57,20 @@ services:
     networks:
       - manfree_network
 
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    container_name: manfree_cloudflared
+    restart: always
+    command: tunnel --no-autoupdate run --token ${CLOUDFLARE_TUNNEL_TOKEN}
+    environment:
+      - TUNNEL_TOKEN=${CLOUDFLARE_TUNNEL_TOKEN}
+    depends_on:
+      - moodle
+    networks:
+      - manfree_network
+    profiles:
+      - tunnel
+
 volumes:
   mariadb_data:
   moodle_data:

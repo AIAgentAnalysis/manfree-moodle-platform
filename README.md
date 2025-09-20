@@ -46,7 +46,7 @@ docker-compose down
 ### Access Points
 - **Local Access**: http://localhost:8080
 - **LAN Access**: http://YOUR-IP:8080 (for students)
-- **Global Access**: Use `tunneling/` scripts for worldwide access
+- **Global Access**: Use `global-access/` for worldwide access
 - **Admin Panel**: http://localhost:8080/admin
 
 ---

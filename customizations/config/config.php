@@ -18,7 +18,12 @@ $CFG->dboptions = array (
 );
 
 // Dynamic URL detection for tunnels
-if (isset($_SERVER['HTTP_HOST']) && strpos($_SERVER['HTTP_HOST'], 'ngrok') !== false) {
+if (isset($_SERVER['HTTP_HOST']) && strpos($_SERVER['HTTP_HOST'], 'learning.manfreetechnologies.com') !== false) {
+    $CFG->wwwroot = 'https://learning.manfreetechnologies.com';
+    $CFG->sslproxy = true;
+    $_SERVER['HTTPS'] = 'on';
+    $_SERVER['SERVER_PORT'] = 443;
+} elseif (isset($_SERVER['HTTP_HOST']) && strpos($_SERVER['HTTP_HOST'], 'ngrok') !== false) {
     $CFG->wwwroot = 'https://' . $_SERVER['HTTP_HOST'];
     $CFG->sslproxy = true;
     $_SERVER['HTTPS'] = 'on';
