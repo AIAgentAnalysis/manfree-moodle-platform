@@ -17,9 +17,9 @@
 5. [Issues & Solutions](#-issues--solutions)
 6. [Repository Structure](#-repository-structure)
 7. [User Workflows](#-user-workflows)
-8. [Troubleshooting](#-troubleshooting)
-9. [Customization Guide](#-customization-guide)
-10. [Support](#-support)
+8. [Documentation](#-documentation)
+
+📚 **[Complete Documentation Index](docs/README.md)** - All guides in one place
 
 ---
 
@@ -46,7 +46,7 @@ docker-compose down
 ### Access Points
 - **Local Access**: http://localhost:8080
 - **LAN Access**: http://YOUR-IP:8080 (for students)
-- **Global Access**: Use `./ngrok-tunnel.sh` for worldwide access
+- **Global Access**: Use `tunneling/` scripts for worldwide access
 - **Admin Panel**: http://localhost:8080/admin
 
 ---

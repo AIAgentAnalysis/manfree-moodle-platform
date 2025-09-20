@@ -28,6 +28,21 @@ if (isset($_SERVER['HTTP_HOST']) && strpos($_SERVER['HTTP_HOST'], 'ngrok') !== f
     $CFG->sslproxy = true;
     $_SERVER['HTTPS'] = 'on';
     $_SERVER['SERVER_PORT'] = 443;
+} elseif (isset($_SERVER['HTTP_HOST']) && strpos($_SERVER['HTTP_HOST'], 'bore.pub') !== false) {
+    $CFG->wwwroot = 'https://' . $_SERVER['HTTP_HOST'];
+    $CFG->sslproxy = true;
+    $_SERVER['HTTPS'] = 'on';
+    $_SERVER['SERVER_PORT'] = 443;
+} elseif (isset($_SERVER['HTTP_HOST']) && strpos($_SERVER['HTTP_HOST'], 'pinggy.io') !== false) {
+    $CFG->wwwroot = 'https://' . $_SERVER['HTTP_HOST'];
+    $CFG->sslproxy = true;
+    $_SERVER['HTTPS'] = 'on';
+    $_SERVER['SERVER_PORT'] = 443;
+} elseif (isset($_SERVER['HTTP_HOST']) && strpos($_SERVER['HTTP_HOST'], 'loca.lt') !== false) {
+    $CFG->wwwroot = 'https://' . $_SERVER['HTTP_HOST'];
+    $CFG->sslproxy = true;
+    $_SERVER['HTTPS'] = 'on';
+    $_SERVER['SERVER_PORT'] = 443;
 } else {
     $CFG->wwwroot = 'http://localhost:8080';
 }
