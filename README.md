@@ -65,6 +65,7 @@ docker-compose down
 **Key Settings Applied:**
 - Database Type: `mariadb` (not mysqli)
 - PHP max_input_vars: `5000` (increased from 1000)
+- File Upload Limits: `100MB` (increased from 2MB default)
 - Database Host: `mariadb` (container name)
 - Data Directory: `/var/www/moodledata`
 - Site URL: `http://localhost:8080`
@@ -138,6 +139,8 @@ ls -la *.sh
 docker pull php:8.1-apache
 docker pull mariadb:10.6
 docker pull trampgeek/jobeinabox
+sudo apt install git-lfs -y
+sudo snap install ngrok
 
 # This step is essential on fresh systems
 ```
@@ -174,7 +177,12 @@ docker pull trampgeek/jobeinabox
 FROM php:8.1-apache
 # PHP Extensions: gd, mysqli, pdo_mysql, zip, intl, soap, opcache, xsl
 # Apache: mod_rewrite enabled
-# PHP Setting: max_input_vars = 5000
+# PHP Settings:
+#   - max_input_vars = 5000
+#   - upload_max_filesize = 100M
+#   - post_max_size = 100M
+#   - max_execution_time = 300
+#   - memory_limit = 256M
 ```
 
 **docker-compose.yml Services:**
@@ -207,6 +215,7 @@ $CFG->dbhost = 'mariadb';        // Container name
 $CFG->wwwroot = 'http://localhost:8080';
 $CFG->dataroot = '/var/www/moodledata';
 $CFG->directorypermissions = 0777;
+$CFG->maxbytes = 104857600;      // 100MB file upload limit
 ```
 
 ---
@@ -256,6 +265,22 @@ chown -R www-data:www-data /var/www/html 2>/dev/null || true
 **Root Cause**: Entrypoint script failing due to permission errors
 
 **Solution Applied**: Added error handling to all chown commands
+
+#### 5. File Upload Size Limit (2MB Default)
+**Issue**: Default Moodle file upload limit too small for course materials
+
+**Root Cause**: PHP and Moodle default settings limit uploads to 2MB
+
+**Solution Applied**:
+```php
+// In customizations/config/config.php
+$CFG->maxbytes = 104857600; // 100MB
+
+// In Dockerfile PHP settings
+upload_max_filesize = 100M
+post_max_size = 100M
+max_execution_time = 300
+```
 
 ### Common Setup Issues & Fixes
 

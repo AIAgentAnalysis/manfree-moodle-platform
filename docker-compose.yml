@@ -36,6 +36,8 @@ services:
       # Persistent data volumes (survives container rebuilds)
       - moodle_data:/var/www/html
       - moodle_data_files:/var/www/moodledata
+      # Permanent repository folder (survives container rebuilds)
+      - ./repository:/var/www/repository
       # Plugin/theme installation
       - ./plugins:/tmp/plugins
       - ./themes:/tmp/themes

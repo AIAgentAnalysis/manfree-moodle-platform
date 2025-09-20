@@ -36,6 +36,9 @@ $CFG->admin     = 'admin';
 
 $CFG->directorypermissions = 0777;
 
+// File upload limits - 100MB
+$CFG->maxbytes = 104857600; // 100MB in bytes
+
 // Dynamic tunnel detection handles SSL automatically
 
 require_once(__DIR__ . '/lib/setup.php');

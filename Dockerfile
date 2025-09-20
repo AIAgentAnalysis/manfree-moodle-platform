@@ -31,7 +31,13 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
 RUN a2enmod rewrite
 
 # Configure PHP settings for Moodle
-RUN echo "max_input_vars = 5000" >> /usr/local/etc/php/conf.d/moodle.ini
+# File Upload Limits: Increased from 2MB to 100MB for large file support
+RUN echo "max_input_vars = 5000" >> /usr/local/etc/php/conf.d/moodle.ini \
+    && echo "upload_max_filesize = 100M" >> /usr/local/etc/php/conf.d/moodle.ini \
+    && echo "post_max_size = 100M" >> /usr/local/etc/php/conf.d/moodle.ini \
+    && echo "max_execution_time = 300" >> /usr/local/etc/php/conf.d/moodle.ini \
+    && echo "max_input_time = 300" >> /usr/local/etc/php/conf.d/moodle.ini \
+    && echo "memory_limit = 256M" >> /usr/local/etc/php/conf.d/moodle.ini
 
 # Copy local Moodle source (no external dependencies)
 WORKDIR /var/www/html
