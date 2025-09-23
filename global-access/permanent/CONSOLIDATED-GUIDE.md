@@ -75,6 +75,17 @@ cloudflared tunnel login
 ./global-access/permanent/setup.sh --restart
 ```
 
+### 4. OAuth 2 Configuration (Optional)
+```bash
+# For Google sign-in integration:
+# 1. Enable OAuth 2 in Moodle admin panel
+# 2. Configure Google service with Client ID/Secret
+# 3. Update Google Cloud Console redirect URI:
+#    https://learning.manfreetechnologies.com/admin/oauth2callback.php
+# 4. Test OAuth callback:
+curl -I https://learning.manfreetechnologies.com/admin/oauth2callback.php
+```
+
 ---
 
 ## 🔄 Integration Points
@@ -145,6 +156,47 @@ cloudflared tunnel login
 sudo journalctl -u cloudflared -f
 ```
 
+#### "Tunnel status shows inconsistency"
+```bash
+# Problem: Service running but tunnel shows "Not created"
+# Status shows: ❌ Tunnel: Not created, ✅ Service: Running
+
+# Fix commands:
+cd manfree-moodle-platform
+
+# Check what tunnels actually exist
+cloudflared tunnel list
+
+# If moodle-tunnel exists but not detected, re-run setup
+./global-access/permanent/setup.sh --setup
+
+# If no tunnels exist, create one
+./global-access/permanent/setup.sh --setup
+
+# Restart everything to ensure consistency
+./down.sh && ./up.sh
+
+# Verify final status
+./global-access/permanent/setup.sh --status
+```
+
+#### "Google OAuth sign-in not working"
+```bash
+# 1. Enable OAuth 2 authentication in Moodle
+# Site administration → Plugins → Authentication → Manage authentication
+# Enable "OAuth 2" plugin
+
+# 2. Test OAuth callback URL
+curl -I https://learning.manfreetechnologies.com/admin/oauth2callback.php
+# Should return 200 OK, not 404
+
+# 3. Update Google Cloud Console
+# Add redirect URI: https://learning.manfreetechnologies.com/admin/oauth2callback.php
+
+# 4. Clear Moodle cache
+./down.sh && ./up.sh
+```
+
 ### Diagnostic Commands
 ```bash
 # Complete system check
@@ -179,6 +231,12 @@ sudo systemctl status cloudflared
 ### ✅ Configuration Issues
 - Health check recreates missing files
 - Auto-repair for common problems
+
+### ✅ OAuth 2 Integration Issues
+- Google sign-in configuration problems
+- OAuth callback URL 404 errors
+- Authentication plugin not enabled
+- Redirect URI mismatches
 
 ---
 
