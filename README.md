@@ -436,7 +436,8 @@ manfree-moodle-platform/
 ## ✨ Features
 
 ### Core Features
-- ✅ **Official Moodle 4.0** (not Bitnami - more stable)
+- ✅ **Official Moodle 4.5.6** (not Bitnami - more stable)
+- ✅ **AI Question Generator** (OpenAI GPT-4o-mini integrated)
 - ✅ **Offline Operation** (LAN-based, no internet required)
 - ✅ **Docker Containerized** (easy deployment)
 - ✅ **Automatic Backup/Restore** (data persistence)
