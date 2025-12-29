@@ -8,6 +8,8 @@ Centralized documentation for Manfree Moodle Platform.
 
 ## ⚙️ Configuration
 - **[File Upload Limits](../FILE-UPLOAD-LIMITS.md)** - 100MB upload configuration
+- **[VPL Setup Guide](../VPL-SETUP-GUIDE.md)** - Virtual Programming Lab integration
+- **[Moodle Cron Setup](../MOODLE-CRON-SETUP.md)** - Scheduled tasks configuration
 - **[Docker Setup](../docker-compose.yml)** - Container configuration
 - **[Environment Variables](../.env.example)** - Configuration template
 

@@ -49,7 +49,7 @@ if (isset($_SERVER['HTTP_HOST']) && strpos($_SERVER['HTTP_HOST'], 'learning.manf
     $_SERVER['HTTPS'] = 'on';
     $_SERVER['SERVER_PORT'] = 443;
 } else {
-    $CFG->wwwroot = 'http://localhost:8080';
+    $CFG->wwwroot = 'http://84.247.191.41:8080';
 }
 $CFG->dataroot  = '/var/www/moodledata';
 $CFG->admin     = 'admin';
@@ -61,7 +61,7 @@ $CFG->maxbytes = 104857600; // 100MB in bytes
 
 // Dynamic tunnel detection handles SSL automatically
 
-require_once(__DIR__ . '/lib/setup.php');
+require_once('/var/www/html/lib/setup.php');
 
 // There is no php closing tag in this file,
 // it is intentional because it prevents trailing whitespace problems!

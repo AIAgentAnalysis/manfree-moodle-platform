@@ -73,9 +73,10 @@ docker-compose down
 **Docker Services:**
 ```yaml
 Services Running:
-- manfree_moodle:8080    # Main Moodle application
-- manfree_mariadb:3306   # Database (internal)
-- manfree_jobe:4000      # CodeRunner server
+- manfree_moodle:8080     # Main Moodle application
+- manfree_mariadb:3306    # Database (internal)
+- manfree_jobe:4000       # CodeRunner server
+- manfree_vpl_jail:8081   # VPL execution server (Virtual Programming Lab)
 ```
 
 **Database Configuration:**
@@ -808,6 +809,9 @@ $CFG->dataroot = '/var/www/moodledata';
 | **README.md** | Main documentation & overview | All users |
 | **[DEPLOYMENT.md](DEPLOYMENT.md)** | Platform-specific setup guide | IT Staff |
 | **[TROUBLESHOOTING.md](TROUBLESHOOTING.md)** | Issue resolution guide | IT Staff |
+| **[VPL-SETUP-GUIDE.md](VPL-SETUP-GUIDE.md)** | Virtual Programming Lab setup | IT Staff |
+| **[FILE-UPLOAD-LIMITS.md](FILE-UPLOAD-LIMITS.md)** | File upload configuration | IT Staff |
+| **[MOODLE-CRON-SETUP.md](MOODLE-CRON-SETUP.md)** | Scheduled tasks setup | IT Staff |
 | **[staff-workflow.md](staff-workflow.md)** | Daily usage guide | Instructors |
 
 ### Quick Reference
@@ -833,6 +837,7 @@ docker-compose logs moodle
 - **Student Access**: http://localhost:8080
 - **Admin Panel**: http://localhost:8080/admin
 - **CodeRunner**: http://localhost:4000 (internal)
+- **VPL Jail**: http://localhost:8081 (internal - configure as `http://manfree_vpl_jail` in Moodle)
 
 ---
 
