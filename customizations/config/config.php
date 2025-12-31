@@ -23,6 +23,11 @@ if (isset($_SERVER['HTTP_HOST']) && strpos($_SERVER['HTTP_HOST'], 'learning.manf
     $CFG->sslproxy = true;
     $_SERVER['HTTPS'] = 'on';
     $_SERVER['SERVER_PORT'] = 443;
+} elseif (isset($_SERVER['HTTP_HOST']) && strpos($_SERVER['HTTP_HOST'], 'vmi2965057.contaboserver.net') !== false) {
+    $CFG->wwwroot = 'https://vmi2965057.contaboserver.net';
+    $CFG->sslproxy = true;
+    $_SERVER['HTTPS'] = 'on';
+    $_SERVER['SERVER_PORT'] = 443;
 } elseif (isset($_SERVER['HTTP_HOST']) && strpos($_SERVER['HTTP_HOST'], 'ngrok') !== false) {
     $CFG->wwwroot = 'https://' . $_SERVER['HTTP_HOST'];
     $CFG->sslproxy = true;

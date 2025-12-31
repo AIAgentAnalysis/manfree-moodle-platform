@@ -19,20 +19,18 @@ RUN apt-get update && apt-get install -y \
     bash \
     && rm -rf /var/lib/apt/lists/*
 
-# Download VPL Jail System
+# Download VPL Jail System v2.5 (latest stable release)
 WORKDIR /
-RUN git clone https://github.com/jcrodriguez-dis/vpl-jail-system.git /vpl-jail-system
+RUN git clone --branch v2.5 --depth 1 https://github.com/jcrodriguez-dis/vpl-jail-system.git /vpl-jail-system
 
 WORKDIR /vpl-jail-system
 
-# Install VPL Jail System
-RUN chmod +x install-bash-sh install-vpl-sh \
-    && ./install-bash-sh \
-    && ./install-vpl-sh noninteractive standard
+# Install VPL Jail System v2.5
+RUN chmod +x install-sh install-vpl-sh \
+    && ./install-vpl-sh
 
-# Configure VPL Jail for Docker - disable firewall and tmpfs
-RUN sed -i 's/^FIREWALL=.*/FIREWALL=0/' /etc/vpl/vpl-jail-system.conf \
-    && echo "USETMPFS=false" >> /etc/vpl/vpl-jail-system.conf
+# Configure VPL Jail for Docker - disable firewall
+RUN sed -i 's/^FIREWALL=.*/FIREWALL=0/' /etc/vpl/vpl-jail-system.conf
 
 # Create jail directory and required structure
 RUN mkdir -p /jail/etc && \

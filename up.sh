@@ -44,7 +44,6 @@ echo ""
 echo "📦 Services Running:"
 echo "   🎓 Moodle LMS        → http://localhost:8080"
 echo "   🏃 CodeRunner (Jobe) → http://localhost:4000"
-echo "   🔒 VPL Jail Server   → http://localhost:8081"
 echo ""
 echo "🌐 LAN Access: http://$(hostname -I | awk '{print $1}'):8080"
 if systemctl is-active cloudflared &>/dev/null; then
@@ -55,8 +54,5 @@ else
     echo "⚠️  Global access not available - tunnel service not running"
 fi
 echo ""
-echo "💡 VPL Configuration:"
-echo "   In Moodle → Site Administration → Plugins → VPL"
-echo "   Set execution server to: http://manfree_vpl_jail"
 echo "👤 First time setup required - create admin account"
 echo "🔧 CodeRunner available at: http://localhost:4000"

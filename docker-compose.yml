@@ -26,6 +26,8 @@ services:
     restart: always
     ports:
       - "8080:80"
+    extra_hosts:
+      - "vmi2965057.contaboserver.net:84.247.191.41"
     environment:
       MOODLE_DB_HOST: mariadb
       MOODLE_DB_NAME: ${MYSQL_DATABASE}
@@ -54,20 +56,6 @@ services:
     restart: always
     ports:
       - "4000:80"
-    networks:
-      - manfree_network
-
-  vpl-jail:
-    build:
-      context: ./vpl-jail
-      dockerfile: Dockerfile
-    image: manfree-vpl-jail:latest
-    container_name: manfree_vpl_jail
-    restart: always
-    privileged: true
-    ports:
-      - "8081:80"
-      - "8443:443"
     networks:
       - manfree_network
 
