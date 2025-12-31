@@ -9,6 +9,58 @@
 
 ---
 
+## Table of Contents
+
+### Quick Navigation
+- [Executive Summary](#executive-summary)
+- [1. Problem Statement](#1-problem-statement)
+  - [1.1 Initial Requirements](#11-initial-requirements)
+  - [1.2 Initial Architecture](#12-initial-architecture)
+- [2. Technical Challenges Encountered](#2-technical-challenges-encountered)
+  - [2.1 Architecture Selection](#21-architecture-selection)
+  - [2.2 Configuration Syntax Issues](#22-configuration-syntax-issues)
+  - [2.3 Compilation Performance Crisis](#23-compilation-performance-crisis)
+  - [2.4 Interactive Terminal Not Opening](#24-interactive-terminal-not-opening)
+  - [2.5 SSL Certificate Hostname Mismatch & Docker DNS Resolution](#25-ssl-certificate-hostname-mismatch--docker-dns-resolution)
+  - [2.6 Port Conflict Resolution](#26-port-conflict-resolution)
+  - [2.7 vpl_run.sh Terminal Mode Detection](#27-vpl_runsh-terminal-mode-detection)
+- [3. Solution Architecture](#3-solution-architecture)
+  - [3.1 Final System Design](#31-final-system-design)
+  - [3.2 Component Specifications](#32-component-specifications)
+    - [3.2.1 Host System](#321-host-system)
+    - [3.2.2 Nginx Configuration](#322-nginx-configuration)
+    - [3.2.3 VPL Jail Configuration](#323-vpl-jail-configuration)
+    - [3.2.4 Moodle Configuration](#324-moodle-configuration)
+    - [3.2.5 VPL Plugin Configuration (Database)](#325-vpl-plugin-configuration-database)
+    - [3.2.6 Docker Compose Configuration](#326-docker-compose-configuration)
+- [4. Implementation Steps](#4-implementation-steps)
+- [5. Verification & Testing](#5-verification--testing)
+  - [5.1 SSL/TLS Verification](#51-ssltls-verification)
+  - [5.2 WebSocket Connection Test](#52-websocket-connection-test)
+  - [5.3 Interactive Terminal Test](#53-interactive-terminal-test)
+  - [5.4 Auto-Grading Test](#54-auto-grading-test)
+- [6. Performance Metrics](#6-performance-metrics)
+- [7. Security Considerations](#7-security-considerations)
+  - [7.1 Implemented Security Measures](#71-implemented-security-measures)
+  - [7.2 Optional Security Enhancements](#72-optional-security-enhancements)
+- [8. Operational Procedures](#8-operational-procedures)
+  - [8.1 Service Management](#81-service-management)
+  - [8.2 Certificate Renewal](#82-certificate-renewal)
+  - [8.3 Backup Procedures](#83-backup-procedures)
+  - [8.4 Troubleshooting Guide](#84-troubleshooting-guide)
+- [9. Lessons Learned](#9-lessons-learned)
+  - [9.1 Critical Success Factors](#91-critical-success-factors)
+  - [9.2 Common Pitfalls to Avoid](#92-common-pitfalls-to-avoid)
+  - [9.3 Alternative Approaches Considered](#93-alternative-approaches-considered)
+- [10. Production Deployment Checklist](#10-production-deployment-checklist)
+- [11. Future Recommendations](#11-future-recommendations)
+  - [11.1 Short-term (1-3 months)](#111-short-term-1-3-months)
+  - [11.2 Medium-term (3-6 months)](#112-medium-term-3-6-months)
+  - [11.3 Long-term (6-12 months)](#113-long-term-6-12-months)
+- [12. Conclusion](#12-conclusion)
+
+---
+
 ## Executive Summary
 
 Successfully deployed Virtual Programming Lab (VPL) 4.0.4 with full interactive terminal support for C programming assignments. The implementation required transitioning from HTTP to HTTPS infrastructure to enable secure WebSocket (wss://) communication, which is essential for browser-based interactive terminals.
