@@ -17,7 +17,7 @@ if [ -f "./auto-restore.sh" ] && [ -d "./backup" ] && [ "$(ls -A ./backup/*.tar.
 fi
 
 # Build and start containers
-docker-compose up -d --build
+docker compose up -d --build
 
 # Auto-setup and start tunnel
 if [ -f "./global-access/permanent/setup.sh" ]; then
@@ -40,7 +40,11 @@ else
 fi
 
 echo "✅ Platform started successfully!"
-echo "🌐 Access: http://localhost:8080"
+echo ""
+echo "📦 Services Running:"
+echo "   🎓 Moodle LMS        → http://localhost:8080"
+echo "   🏃 CodeRunner (Jobe) → http://localhost:4000"
+echo ""
 echo "🌐 LAN Access: http://$(hostname -I | awk '{print $1}'):8080"
 if systemctl is-active cloudflared &>/dev/null; then
     echo "🌍 Global Access: https://learning.manfreetechnologies.com"
@@ -49,5 +53,6 @@ if systemctl is-active cloudflared &>/dev/null; then
 else
     echo "⚠️  Global access not available - tunnel service not running"
 fi
+echo ""
 echo "👤 First time setup required - create admin account"
 echo "🔧 CodeRunner available at: http://localhost:4000"

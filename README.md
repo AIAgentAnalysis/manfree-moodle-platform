@@ -73,9 +73,9 @@ docker-compose down
 **Docker Services:**
 ```yaml
 Services Running:
-- manfree_moodle:8080    # Main Moodle application
-- manfree_mariadb:3306   # Database (internal)
-- manfree_jobe:4000      # CodeRunner server
+- manfree_moodle:8080     # Main Moodle application
+- manfree_mariadb:3306    # Database (internal)
+- manfree_jobe:4000       # CodeRunner server
 ```
 
 **Database Configuration:**
@@ -808,6 +808,8 @@ $CFG->dataroot = '/var/www/moodledata';
 | **README.md** | Main documentation & overview | All users |
 | **[DEPLOYMENT.md](DEPLOYMENT.md)** | Platform-specific setup guide | IT Staff |
 | **[TROUBLESHOOTING.md](TROUBLESHOOTING.md)** | Issue resolution guide | IT Staff |
+| **[FILE-UPLOAD-LIMITS.md](FILE-UPLOAD-LIMITS.md)** | File upload configuration | IT Staff |
+| **[MOODLE-CRON-SETUP.md](MOODLE-CRON-SETUP.md)** | Scheduled tasks setup | IT Staff |
 | **[staff-workflow.md](staff-workflow.md)** | Daily usage guide | Instructors |
 
 ### Quick Reference

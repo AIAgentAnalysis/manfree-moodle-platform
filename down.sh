@@ -19,7 +19,7 @@ if [ -f "./auto-backup.sh" ]; then
 fi
 
 # Stop containers
-docker-compose down
+docker compose down
 
 # Show tunnel status
 if systemctl is-active cloudflared &>/dev/null; then
